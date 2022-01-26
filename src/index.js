@@ -3,12 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import 'semantic-ui-css/semantic.min.css'
+import Home from './pages/Home'
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />}>
+        
+      </Route>
+    </Routes>
+  </BrowserRouter>
+  ,document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
