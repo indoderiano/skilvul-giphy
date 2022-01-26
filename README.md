@@ -13,3 +13,6 @@ Using older version of react-scripts
 - Search Giphys
 - Pagination
 - Reusable Component
+
+# Netlify
+https://skilvul-giphys-mde50526.netlify.app/
