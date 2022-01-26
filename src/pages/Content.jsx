@@ -1,4 +1,4 @@
-import { Header, Input, Pagination, Card, Image } from 'semantic-ui-react'
+import { Header, Input, Pagination } from 'semantic-ui-react'
 import loadingGif from '../assets/loading.gif'
 import noresult from '../assets/no-results.png'
 import { useEffect, useState } from 'react'
@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { loadGifs, loadTrendingGifs } from '../redux/actions'
 import { useLocation } from 'react-router-dom'
 import { OFFSET } from '../api/settings'
+import Gifs from '../components/Gifs'
 
 export default function Content () {
     const { loading, pagination, list } = useSelector(state => state.gifs)
@@ -14,8 +15,8 @@ export default function Content () {
     const [searchKey, setSearchKey] = useState('')
     const [delay, setDelay] = useState(0)
     const [timer, setTimer] = useState(null)
-    const [activePage, setActivePage] = useState(1)
 
+    const [activePage, setActivePage] = useState(1)
 
     useEffect(() => {
         if(pathname === '/ironman'){
@@ -77,34 +78,22 @@ export default function Content () {
         }
     }
 
-    const renderGiphys = () => {
-        return list.map((data, index) => {
+    const displayPagination = () => {
+        let totalPages = pagination.total_count?Math.ceil(pagination.total_count/OFFSET):0
+        if (totalPages > 1) {
             return (
-                <Card
-                    link
-                    style={{
-                        display: 'inline-grid',
-                        margin: '10px'
-                    }}
-                    key={index}
-                >
-                    <Card.Content>
-                        <Image
-                            src={data.images?.original?.url}
-                            style={{
-                                marginBottom: '20px',
-                                minHeight: '100px',
-                                backgroundImage: 'url(' + loadingGif + ')',
-                                backgroundSize: "100%",
-                                backgroundPositoin: 'center center',
-                                backgroundRepeat: 'no-repeat'
-                            }}
-                        />
-                        <Card.Header style={{fontSize: '24px'}}>{data.title}</Card.Header>
-                    </Card.Content>
-                </Card>
+                <div>
+                    <Pagination
+                        style={{marginBottom: '2em', marginTop: '2em'}}
+                        activePage={activePage}
+                        onPageChange={(e, { activePage }) => setActivePage(activePage)}
+                        totalPages={totalPages}
+                    />
+                </div>
             )
-        })
+        } else {
+            return null
+        }
     }
 
     return (
@@ -139,13 +128,14 @@ export default function Content () {
                         alt="no result"
                     />
                     :
-                    <div>
-                        {
-                            renderGiphys()
-                        }
-                    </div>
+                    <Gifs/>
+                }
+
+                {
+                    displayPagination()
                 }
                 
+
             </div>
             
         </div>
