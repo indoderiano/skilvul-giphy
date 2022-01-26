@@ -9,10 +9,9 @@ Using older version of react-scripts
 
 ## Features
 - Home Page
-- Iron man Giphys
-- Search Giphys
+- Page Iron man Giphys
+- Page Search Giphys
 - Pagination
-- Reusable Component
 
 # Netlify
 https://skilvul-giphys-mde50526.netlify.app/
