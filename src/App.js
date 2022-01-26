@@ -1,20 +1,15 @@
 import './App.css';
-import { Routes, useNavigate, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
+import Redirect from './components/Redirect'
 
 function App() {
-  let navigate = useNavigate();
   return (
     <div className="App">
-      <div>
-        TTESTTTT
-      </div>
-      {/* <BrowserRouter> */}
-        {/* <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='/*' exact element={()=> {navigate("/"); <div/>}}/>
-        </Routes> */}
-      {/* </BrowserRouter> */}
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        {/* <Route path='/*' element={<Redirect />} /> */}
+      </Routes>
     </div>
   );
 }
